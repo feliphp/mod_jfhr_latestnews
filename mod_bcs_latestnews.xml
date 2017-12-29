@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+	<name>jfhr Latest News</name>
+	<author>JOSE FELIPE HERRERA R </author>
+	<version>1.0.0</version>
+	<description>A simple jfhr Latest News from Article!.</description>
+	<files>
+		<filename>mod_jfhr_latestnews.xml</filename>
+		<filename module="mod_jfhr_latestnews">mod_jfhr_latestnews.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+		<folder>language</folder>
+		<folder>assets</folder>
+		<folder>themes</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<!-- Campo Selector de Categoría -->
+				<field name="title" type="sql" default="1" label="Select Category:"
+					query="SELECT id AS value, title FROM #__categories" />
+				<!-- Campo de Fuente de Datos -->
+				-->
+				<field name="source" type="list"
+					description="MOD_JFHR_LATESTNEWS_FIELD_SOURCE_DESC" label="MOD_JFHR_LATESTNEWS_FIELD_SOURCE"
+					size="30" default="MOD_JFHR_LATESTNEWS_OPTION_ARTICLE">
+					<option value="article">MOD_JFHR_LATESTNEWS_OPTION_ARTICLE</option>
+					<option value="metadata">MOD_JFHR_LATESTNEWS_OPTION_METADATA</option>
+					<option value="type">MOD_JFHR_LATESTNEWS_OPTION_TYPE</option>
+				</field>
+				<!-- Campo de Destino del Hipervinculo -->
+				<field name="url_source" type="list"
+					description="MOD_JFHR_LATESTNEWS_FIELD_URL_SOURCE_DESC" label="MOD_jfhr_LATESTNEWS_FIELD_URL_SOURCE"
+					size="30" default="MOD_JFHR_LATESTNEWS_URL_OPTION_ARTICLE">
+					<option value="article">MOD_JFHR_LATESTNEWS_URL_OPTION_ARTICLE</option>
+					<option value="metadata">MOD_JFHR_LATESTNEWS_URL_OPTION_METADATA
+					</option>
+				</field>
+				<!-- Campo de Hipervinculo A Página Nueva o a la Misma Página -->
+				<field name="target_url" type="radio" class="btn-group btn-group-yesno"
+					default="0" description="MOD_JFHR_LATESTNEWS_FIELD_TARGET_URL_DESC"
+					label="MOD_JFHR_LATESTNEWS_FIELD_TARGET_URL">
+					<option value="_blank">NEW</option>
+					<option value="_self">SELF</option>
+				</field>
+				<!-- Campo de Número de Items -->
+				<field name="number_news" type="text" default="4"
+					label="MOD_JFHR_LATESTNEWS_FIELD_NUMBER_NEWS" description="MOD_JFHR_LATESTNEWS_FIELD_NUMBER_NEWS_DESC" />
+				<!-- Campo Para Permitir mostrar La Imagen Pequeña -->
+				<field name="show_thumbnail" type="radio" class="btn-group btn-group-yesno"
+					default="0" description="MOD_JFHR_LATESTNEWS_FIELD_SHOW_THUMBNAIL_DESC"
+					label="MOD_JFHR_LATESTNEWS_FIELD_SHOW_THUMBNAIL">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+				<!-- Campo Para Permitir mostrar el Título -->
+				<field name="show_title" type="radio" class="btn-group btn-group-yesno"
+					default="0" description="MOD_JFHR_LATESTNEWS_FIELD_SHOW_TITLE_DESC"
+					label="MOD_JFHR_LATESTNEWS_FIELD_SHOW_TITLE">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+				<!-- Campo Para limitar el tamaño del Título -->
+				<field name="limit_title" type="text" default="50"
+					label="MOD_JFHR_LATESTNEWS_FIELD_LIMIT_TITLE" description="MOD_JFHR_LATESTNEWS_FIELD_LIMIT_TITLE_DESC" />
+				<!-- Campo Para Permitir mostrar La Introducción del Artículo -->
+				<field name="show_intro" type="radio" default="0"
+					class="btn-group btn-group-yesno" description="MOD_JFHR_LATESTNEWS_FIELD_SHOW_INTRO_DESC"
+					label="MOD_JFHR_LATESTNEWS_FIELD_SHOW_INTRO">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+				<!-- Campo Para limitar el tamaño del Contenido de Introducción -->
+				<field name="limit_intro" type="text" default="50"
+					label="MOD_JFHR_LATESTNEWS_FIELD_LIMIT_INTRO" description="MOD_JFHR_LATESTNEWS_FIELD_LIMIT_INTRO_DESC" />
+				<!-- Campo Para definir el ancho del módulo -->
+				<field name="width_latest" type="text" default="60%"
+					label="MOD_JFHR_LATESTNEWS_FIELD_WIDTH_LATEST" description="MOD_JFHR_LATESTNEWS_FIELD_WIDTH_LATEST_DESC" />
+				<!-- Campo Para definir el color del texto del título -->
+				<field name="code_color_title" type="color" default="#000"
+					label="MOD_JFHR_LATESTNEWS_FIELD_COLOR_TITLE" description="MOD_JFHR_LATESTNEWS_FIELD_COLOR_TITLE_DESC" />
+				<!-- Campo Para definir el color de la fecha -->
+				<field name="code_color_date" type="color" default="122F75"
+					label="MOD_JFHR_LATESTNEWS_FIELD_COLOR_DATE" description="MOD_JFHR_LATESTNEWS_FIELD_COLOR_DATE_DESC" />
+				<!-- Campo Para definir el color del texto de introducción -->
+				<field name="code_color_intro" type="color" default="#C0C0C0"
+					label="MOD_JFHR_LATESTNEWS_FIELD_COLOR_INTRO" description="MOD_JFHR_LATESTNEWS_FIELD_COLOR_INTRO_DESC" />
+				<!-- Campo Para definir el color de Fondo -->
+				<field name="code_color_background" type="color" default="#FFF"
+					label="MOD_JFHR_LATESTNEWS_FIELD_COLOR_BACKGROUND" description="MOD_JFHR_LATESTNEWS_FIELD_COLOR_BACKGROUND_DESC" />
+				<!-- Campo Para definir el tamaño del texto -->
+				<field name="font_size_latest" type="text" default="12px"
+					label="MOD_JFHR_LATESTNEWS_FIELD_SIZE_LATEST" description="MOD_JFHR_LATESTNEWS_FIELD_SIZE_LATEST_DESC" />
+				<!-- Campo de Ordenamiento Por Fecha -->
+				<field name="order_date" type="radio" class="btn-group btn-group-yesno"
+					default="0" description="MOD_JFHR_LATESTNEWS_FIELD_ORDER_DATE_DESC"
+					label="MOD_JFHR_LATESTNEWS_FIELD_ORDER_DATE">
+					<option value="ASC">ASC</option>
+					<option value="DESC">DESC</option>
+				</field>
+				<!-- Campo Para Permitir mostrar La Fecha del Artículo -->
+				<field name="show_date" type="radio" default="0"
+					class="btn-group btn-group-yesno" description="MOD_JFHR_LATESTNEWS_FIELD_SHOW_DATE_DESC"
+					label="MOD_JFHR_LATESTNEWS_FIELD_SHOW_DATE">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
